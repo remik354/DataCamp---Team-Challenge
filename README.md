@@ -1,4 +1,4 @@
-# Template Kit for RAMP challenge
+# RAMP challenge - Portugese grade estimation
 
 [![Build status](https://github.com/ramp-kits/template-kit/actions/workflows/test.yml/badge.svg)](https://github.com/ramp-kits/template-kit/actions/workflows/test.yml)
 
@@ -27,7 +27,13 @@ usage.
 
 ### Challenge description
 
-Get started on this RAMP with the
+Before all, you need to load the training and testing data :
+
+```bash
+python download_data.py
+```
+
+To get started on this RAMP challenge with the
 [dedicated notebook](student_grades_estimation_starting_kit.ipynb).
 
 ### Test a submission

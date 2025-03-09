@@ -1,23 +1,16 @@
 from pathlib import Path
-
-from sklearn.datasets import load_digits
 from sklearn.model_selection import train_test_split
-
 import pandas as pd
 import os
 
+DATASET_PATH = Path('dataset')
 DATA_PATH = Path('data')
 
 def read_data(f_name):
-
-    data = pd.read_csv(os.path.join('data/student+performance/student/', f_name), sep=";")
-
+    data = pd.read_csv(os.path.join(DATASET_PATH, f_name), sep=";")
     return data
 
-
-
 def merge_data():
-
     df_math = read_data('student-mat.csv')
     df_por = read_data('student-por.csv')
 
@@ -31,17 +24,15 @@ def merge_data():
 
     return df_final
 
-def train_test():
+def load_data():
     df = merge_data()
 
+    X_train, X_test = train_test_split(
+        df, test_size=0.2, random_state=42, shuffle=True
+    )
 
-
-    df_sampled = df.sample(frac=0.2, random_state=42)
-    train_df = df.drop(df_sampled.index)
-
-    train_df.to_csv(DATA_PATH / 'train.csv', index=False)
-    df_sampled.to_csv(DATA_PATH / 'test.csv', index=False)
-
+    X_train.to_csv(DATA_PATH / 'train.csv', index=False)
+    X_test.to_csv(DATA_PATH / 'test.csv', index=False)
 
 
 if __name__ == '__main__':
@@ -50,7 +41,5 @@ if __name__ == '__main__':
 
     # Load the data
     print('Loading the data...', end='', flush=True)
-    
-    train_test()
-
-    print('done')
+    load_data()
+    print('Done !')

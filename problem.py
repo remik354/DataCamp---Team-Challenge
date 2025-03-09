@@ -2,7 +2,9 @@ import os
 import pandas as pd
 import rampwf as rw
 from sklearn.model_selection import ShuffleSplit
+from pathlib import Path
 
+DATA_PATH = Path('data')
 problem_title = 'Portuguese grade estimation'
 _target_column_name = 'G3_por'
 
@@ -18,7 +20,7 @@ def get_cv(X, y):
     return cv.split(X)
 
 def _read_data(path, f_name):
-    data = pd.read_csv(os.path.join(path, 'data', f_name))
+    data = pd.read_csv(os.path.join(path, DATA_PATH, f_name))
     y_array = data[_target_column_name].values
     X_df = data.drop(_target_column_name, axis=1)
     return X_df, y_array
